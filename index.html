@@ -6,300 +6,189 @@
     <title>12 Dates of Christmas</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #ffecec, #e8f5e8);
             padding: 20px;
+            background: linear-gradient(to bottom, #ffecec, #e8f5e8);
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         h1 {
             text-align: center;
             color: #d32f2f;
-            font-size: 2.5em;
             margin-bottom: 30px;
-        }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .card.welcome {
-            background: #f8d7da;
-            grid-column: 1 / -1;
-        }
-
-        .icon-container {
-            width: 80px;
-            height: 64px;
-            background: #d32f2f;
-            margin: 0 auto 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-        }
-
-        .welcome-message {
-            display: none;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px auto;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            white-space: pre-line;
-            grid-column: 1 / -1;
-        }
-
-        .welcome-message.show {
-            display: block;
-        }
-
-        .dates-section {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .dates-section.show {
-            display: block;
-        }
-
-        .envelopes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
         }
 
         .envelope {
             background: white;
             padding: 20px;
             border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.3s;
+            margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
         .envelope:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
         }
 
-        .date-card {
-            background: white;
+        .message {
+            display: none;
             padding: 20px;
+            background: white;
             border-radius: 10px;
+            margin-top: 10px;
+            white-space: pre-line;
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            background: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .date-card h3 {
-            color: #d32f2f;
-            margin-top: 0;
+        .envelope-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
 
-        .reset-btn {
-            background: none;
-            border: none;
-            color: #d32f2f;
-            cursor: pointer;
-            padding: 10px;
-            margin: 20px 0;
-            display: block;
-            margin-left: auto;
-        }
-
-        .reset-btn:hover {
-            color: #b71c1c;
-        }
-
-        .section-title {
-            color: #d32f2f;
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
+        .icon {
+            font-size: 24px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>12 Dates of Christmas</h1>
-        
-        <div class="cards-container">
-            <div class="card welcome" onclick="toggleWelcome()">
-                <div class="icon-container">📝</div>
-                <h2>Read Me First</h2>
-                <p>Click to read your special message</p>
-            </div>
 
-            <div class="welcome-message" id="welcome-message">
-                <h2>My Dearest Love,</h2>
-                <p>Welcome to your special "12 Dates of Christmas" gift! I've planned twelve unique dates for us, each one carefully chosen to create wonderful memories together.
+        <!-- Welcome Message -->
+        <div class="envelope" onclick="toggleMessage('welcome')">
+            <div class="icon">📝</div>
+            <h2>Read Me First</h2>
+            <p>Click to read your special message</p>
+        </div>
+        <div id="welcome" class="message">
+            <h2>My Dearest Love,</h2>
+            <p>Welcome to your special "12 Dates of Christmas" gift! I've planned twelve unique dates for us, each one carefully chosen to create wonderful memories together.
 
 Here's how it works:
-1. You'll find three categories of dates: At-Home/Chill, A Little Adventurous, and More Adventurous
+1. Below you'll find three categories of dates
 2. Each category has four special date envelopes waiting to be opened
-3. You can choose any envelope you'd like, and we'll go on that date together
-4. The website will remember which dates we've opened, so we can keep track of our adventures
+3. Click any envelope to reveal the date inside
+4. The website will remember which dates we've opened
 
-These dates are my promise to you - a promise of quality time, adventures, laughter, and love. Each envelope contains not just a date idea, but my heartfelt thoughts about spending this special time with you.
+These dates are my promise to you - a promise of quality time, adventures, and love.
 
 With all my love,
 [Your name]</p>
-            </div>
+        </div>
 
-            <div class="card" onclick="showCategory('chill')">
-                <div class="icon-container">🏠</div>
-                <h2>At-Home/Chill</h2>
-                <p>Cozy dates for relaxing together</p>
-            </div>
+        <!-- At Home Dates -->
+        <div class="category">
+            <h2 class="category-title">🏠 At-Home/Chill Dates</h2>
+            <div class="envelope-grid">
+                <div class="envelope" onclick="toggleMessage('chill1')">
+                    <div class="icon">❤️</div>
+                    <h3>Date #1</h3>
+                    <p>Click to open</p>
+                </div>
+                <div id="chill1" class="message">
+                    <h3>Cozy Movie Marathon</h3>
+                    <p>My dear love,
 
-            <div class="card" onclick="showCategory('adventure')">
-                <div class="icon-container">🧭</div>
-                <h2>A Little Adventurous</h2>
-                <p>Fun experiences outside our comfort zone</p>
-            </div>
+Let's create our own cinema paradise at home! We'll build a blanket fort, prepare our favorite snacks, and line up a series of movies we've been wanting to watch together.
 
-            <div class="card" onclick="showCategory('more-adventure')">
-                <div class="icon-container">🏔️</div>
-                <h2>More Adventurous</h2>
-                <p>Exciting challenges for thrill-seekers</p>
+With love,
+[Your name]</p>
+                </div>
+                <!-- Add more envelopes following the same pattern -->
             </div>
         </div>
 
-        <div id="dates-section-chill" class="dates-section">
-            <h2 class="section-title">At-Home/Chill Dates</h2>
-            <button class="reset-btn" onclick="resetCategory('chill')">Reset This Category</button>
-            <div id="envelopes-chill" class="envelopes"></div>
+        <!-- Adventure Dates -->
+        <div class="category">
+            <h2 class="category-title">🧭 A Little Adventurous</h2>
+            <div class="envelope-grid">
+                <div class="envelope" onclick="toggleMessage('adv1')">
+                    <div class="icon">❤️</div>
+                    <h3>Date #1</h3>
+                    <p>Click to open</p>
+                </div>
+                <div id="adv1" class="message">
+                    <h3>Local Food Tour</h3>
+                    <p>My adventurous love,
+
+I've mapped out a delicious journey through our city! We'll visit 4-5 different local spots, trying signature dishes at each place.
+
+Ready to taste the adventure,
+[Your name]</p>
+                </div>
+                <!-- Add more envelopes following the same pattern -->
+            </div>
         </div>
 
-        <div id="dates-section-adventure" class="dates-section">
-            <h2 class="section-title">A Little Adventurous Dates</h2>
-            <button class="reset-btn" onclick="resetCategory('adventure')">Reset This Category</button>
-            <div id="envelopes-adventure" class="envelopes"></div>
-        </div>
+        <!-- More Adventurous Dates -->
+        <div class="category">
+            <h2 class="category-title">🏔️ More Adventurous</h2>
+            <div class="envelope-grid">
+                <div class="envelope" onclick="toggleMessage('more1')">
+                    <div class="icon">❤️</div>
+                    <h3>Date #1</h3>
+                    <p>Click to open</p>
+                </div>
+                <div id="more1" class="message">
+                    <h3>Hot Air Balloon Ride</h3>
+                    <p>My adventurous spirit,
 
-        <div id="dates-section-more-adventure" class="dates-section">
-            <h2 class="section-title">More Adventurous Dates</h2>
-            <button class="reset-btn" onclick="resetCategory('more-adventure')">Reset This Category</button>
-            <div id="envelopes-more-adventure" class="envelopes"></div>
+We're taking our love to new heights - literally! I've arranged an early morning hot air balloon ride for us.
+
+Looking forward to soaring with you,
+[Your name]</p>
+                </div>
+                <!-- Add more envelopes following the same pattern -->
+            </div>
         </div>
     </div>
 
     <script>
-        const dateIdeas = {
-            // ... [Previous dateIdeas object remains exactly the same] ...
-        };
-
-        let openedEnvelopes = JSON.parse(localStorage.getItem('openedEnvelopes') || '{}');
-
-        function toggleWelcome() {
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.classList.toggle('show');
-        }
-
-        function showCategory(category) {
-            // Hide all date sections
-            document.querySelectorAll('.dates-section').forEach(section => {
-                section.classList.remove('show');
-            });
+        // Simple toggle function for messages
+        function toggleMessage(id) {
+            const message = document.getElementById(id);
+            const currentDisplay = message.style.display;
+            message.style.display = currentDisplay === 'block' ? 'none' : 'block';
             
-            // Show selected category
-            document.getElementById(`dates-section-${category}`).classList.add('show');
-            renderDates(category);
+            // Save state to localStorage
+            const openStates = JSON.parse(localStorage.getItem('openStates') || '{}');
+            openStates[id] = message.style.display === 'block';
+            localStorage.setItem('openStates', JSON.stringify(openStates));
         }
 
-        function resetCategory(category) {
-            if (confirm('Are you sure you want to reset this category?')) {
-                // Remove only the envelopes from this category
-                const updatedEnvelopes = {};
-                for (let key in openedEnvelopes) {
-                    if (!key.startsWith(category)) {
-                        updatedEnvelopes[key] = openedEnvelopes[key];
+        // Load saved states on page load
+        window.onload = function() {
+            const openStates = JSON.parse(localStorage.getItem('openStates') || '{}');
+            for (let id in openStates) {
+                if (openStates[id]) {
+                    const message = document.getElementById(id);
+                    if (message) {
+                        message.style.display = 'block';
                     }
                 }
-                openedEnvelopes = updatedEnvelopes;
-                localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
-                renderDates(category);
             }
         }
-
-        function openEnvelope(category, index) {
-            const key = `${category}-${index}`;
-            openedEnvelopes[key] = true;
-            localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
-            renderDates(category);
-        }
-
-        function isEnvelopeOpened(category, index) {
-            return openedEnvelopes[`${category}-${index}`] || false;
-        }
-
-        function renderDates(category) {
-            const container = document.getElementById(`envelopes-${category}`);
-            container.innerHTML = '';
-
-            dateIdeas[category].forEach((date, index) => {
-                const isOpened = isEnvelopeOpened(category, index);
-                const element = document.createElement('div');
-                
-                if (isOpened) {
-                    element.className = 'date-card';
-                    element.innerHTML = `
-                        <h3>${date.title}</h3>
-                        <p style="white-space: pre-line">${date.description}</p>
-                    `;
-                } else {
-                    element.className = 'envelope';
-                    element.onclick = () => openEnvelope(category, index);
-                    element.innerHTML = `
-                        <div class="icon-container">❤️</div>
-                        <p>Click to open</p>
-                    `;
-                }
-                
-                container.appendChild(element);
-            });
-        }
-
-        // Initialize all categories
-        ['chill', 'adventure', 'more-adventure'].forEach(category => {
-            renderDates(category);
-        });
     </script>
 </body>
 </html>
