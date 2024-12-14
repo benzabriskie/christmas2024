@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Dates of Christmas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #ffecec, #e8f5e8);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d32f2f;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            padding: 20px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .category-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .envelopes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .envelope {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope-icon {
+            width: 80px;
+            height: 64px;
+            background: #d32f2f;
+            margin: 0 auto 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .opened-dates {
+            margin-top: 40px;
+        }
+
+        .date-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .date-card h3 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            color: #333;
+        }
+
+        .reset-btn {
+            background: none;
+            border: none;
+            color: #d32f2f;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .reset-btn:hover {
+            color: #b71c1c;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>12 Dates of Christmas</h1>
+        
+        <div id="categories-view">
+            <div class="categories">
+                <button class="category-btn" onclick="showCategory('chill')">
+                    <div class="envelope-icon">🏠</div>
+                    <h2>At-Home/Chill</h2>
+                </button>
+                <button class="category-btn" onclick="showCategory('adventure')">
+                    <div class="envelope-icon">🧭</div>
+                    <h2>A Little Adventurous</h2>
+                </button>
+                <button class="category-btn" onclick="showCategory('more-adventure')">
+                    <div class="envelope-icon">🏔️</div>
+                    <h2>More Adventurous</h2>
+                </button>
+            </div>
+        </div>
+
+        <div id="dates-view" class="hidden">
+            <div class="navigation">
+                <button class="back-btn" onclick="showCategories()">← Back to categories</button>
+                <button class="reset-btn" onclick="resetEnvelopes()">Reset All Envelopes</button>
+            </div>
+            
+            <div id="unopened-dates">
+                <h2>Unopened Dates</h2>
+                <div class="envelopes" id="envelopes-container"></div>
+            </div>
+
+            <div id="opened-dates" class="opened-dates">
+                <h2>Opened Dates</h2>
+                <div id="opened-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dateIdeas = {
+            chill: [
+                {
+                    title: "Cozy Movie Marathon",
+                    description: "My dear love,\n\nLet's create our own cinema paradise at home! We'll build a blanket fort, prepare our favorite snacks, and line up a series of movies we've been wanting to watch together. I'll make sure to have hot chocolate ready, and we can order your favorite takeout. Just us, comfort, and endless entertainment.\n\nWith love and excitement for our cozy night,\n[Your name]"
+                },
+                {
+                    title: "Home Spa Day",
+                    description: "Dearest,\n\nToday we're transforming our home into a luxury spa! I've planned a day of relaxation with face masks, massage oils, and calming music. We'll take turns giving each other massages, enjoy some infused water, and completely unwind together. No phones, no distractions - just pure relaxation.\n\nCan't wait to pamper you,\n[Your name]"
+                },
+                {
+                    title: "Cooking Class at Home",
+                    description: "My love,\n\nGet ready for a culinary adventure right in our kitchen! I've picked out a recipe we've never tried before, bought all the ingredients, and even got us matching aprons. Whether it's a success or a delicious disaster, I know we'll have fun creating something together.\n\nLooking forward to cooking up memories,\n[Your name]"
+                },
+                {
+                    title: "Indoor Picnic & Games",
+                    description: "Darling,\n\nTonight we're having an indoor picnic! I've prepared a spread of your favorite finger foods and set up board games for us to play. We'll lay out blankets, light some candles, and enjoy good food, games, and each other's company without having to worry about the weather.\n\nReady for some fun and games,\n[Your name]"
+                }
+            ],
+            adventure: [
+                {
+                    title: "Local Food Tour",
+                    description: "My adventurous love,\n\nI've mapped out a delicious journey through our city! We'll visit 4-5 different local spots, trying signature dishes at each place. From hidden gems to popular favorites, we'll explore our city's flavors together. I've already researched all the spots and planned the perfect route.\n\nReady to taste the adventure,\n[Your name]"
+                },
+                {
+                    title: "Sunset Kayaking",
+                    description: "Dearest,\n\nLet's paddle into the sunset together! I've arranged for us to go kayaking during the golden hour. We'll glide across the water, watch the sky change colors, and maybe even spot some wildlife. Don't worry - I've taken care of all the equipment rentals.\n\nExcited to share this beautiful experience,\n[Your name]"
+                },
+                {
+                    title: "Paint & Sip Class",
+                    description: "My creative companion,\n\nTonight we're getting artistic! I've booked us spots at a local paint and sip class where we'll create our own masterpieces while enjoying some wine. No artistic experience needed - just bring your sense of adventure and humor. We'll have two unique paintings to remember this night by.\n\nReady to create with you,\n[Your name]"
+                },
+                {
+                    title: "Mystery Dinner",
+                    description: "My curious love,\n\nGet ready for an evening of intrigue! I've booked us tickets to a mystery dinner theater where we'll enjoy a delicious meal while solving a crime. We'll meet interesting characters, collect clues, and work together to crack the case. Dress up is encouraged!\n\nCan't wait to solve this mystery with you,\n[Your name]"
+                }
+            ],
+            'more-adventure': [
+                {
+                    title: "Hot Air Balloon Ride",
+                    description: "My adventurous spirit,\n\nWe're taking our love to new heights - literally! I've arranged an early morning hot air balloon ride for us. We'll float above the city as the sun rises, sip champagne in the clouds, and see the world from a whole new perspective together.\n\nLooking forward to soaring with you,\n[Your name]"
+                },
+                {
+                    title: "Rock Climbing",
+                    description: "My brave companion,\n\nToday we're challenging ourselves with an indoor rock climbing adventure! I've booked us a beginner's lesson where we'll learn the basics of climbing together. We'll encourage each other, push our limits, and celebrate our achievements. Trust me - it'll be an unforgettable experience!\n\nReady to reach new heights with you,\n[Your name]"
+                },
+                {
+                    title: "Dance Class",
+                    description: "My dancing partner,\n\nSurprise! We're going to learn to dance together! I've signed us up for a private dance lesson where we'll learn some basic steps and perhaps even a full routine. Whether we're naturals or have two left feet, it'll be a fun way to get closer and maybe discover a new hobby.\n\nCan't wait to sweep you off your feet,\n[Your name]"
+                },
+                {
+                    title: "Surprise Road Trip",
+                    description: "My adventure buddy,\n\nPack a bag - we're going on a surprise road trip! I've planned out a full day of exploration to a destination within a few hours' drive. We'll discover new places, try local foods, and create memories along the way. The destination is a surprise, but I promise it'll be worth the journey!\n\nExcited to hit the road with you,\n[Your name]"
+                }
+            ]
+        };
+
+        let currentCategory = null;
+        const openedEnvelopes = JSON.parse(localStorage.getItem('openedEnvelopes') || '{}');
+
+        function showCategory(category) {
+            currentCategory = category;
+            document.getElementById('categories-view').classList.add('hidden');
+            document.getElementById('dates-view').classList.remove('hidden');
+            renderDates();
+        }
+
+        function showCategories() {
+            currentCategory = null;
+            document.getElementById('categories-view').classList.remove('hidden');
+            document.getElementById('dates-view').classList.add('hidden');
+        }
+
+        function resetEnvelopes() {
+            localStorage.removeItem('openedEnvelopes');
+            openedEnvelopes = {};
+            renderDates();
+        }
+
+        function openEnvelope(index) {
+            const key = `${currentCategory}-${index}`;
+            openedEnvelopes[key] = true;
+            localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
+            renderDates();
+        }
+
+        function isEnvelopeOpened(index) {
+            return openedEnvelopes[`${currentCategory}-${index}`] || false;
+        }
+
+        function renderDates() {
+            const unopenedContainer = document.getElementById('envelopes-container');
+            const openedContainer = document.getElementById('opened-container');
+            
+            // Clear containers
+            unopenedContainer.innerHTML = '';
+            openedContainer.innerHTML = '';
+
+            dateIdeas[currentCategory].forEach((date, index) => {
+                if (!isEnvelopeOpened(index)) {
+                    const envelope = document.createElement('div');
+                    envelope.className = 'envelope';
+                    envelope.innerHTML = `
+                        <div class="envelope-icon">❤️</div>
+                        <p>Click to open</p>
+                    `;
+                    envelope.onclick = () => openEnvelope(index);
+                    unopenedContainer.appendChild(envelope);
+                } else {
+                    const dateCard = document.createElement('div');
+                    dateCard.className = 'date-card';
+                    dateCard.innerHTML = `
+                        <h3>${date.title}</h3>
+                        <p style="white-space: pre-line">${date.description}</p>
+                    `;
+                    openedContainer.appendChild(dateCard);
+                }
+            });
+
+            // Show/hide sections based on content
+            document.getElementById('unopened-dates').style.display = 
+                unopenedContainer.children.length ? 'block' : 'none';
+            document.getElementById('opened-dates').style.display = 
+                openedContainer.children.length ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
