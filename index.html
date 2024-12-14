@@ -11,13 +11,13 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #ffe6e6 0%, #f8e1e1 100%);
+            background: linear-gradient(135deg, #ffe1e1 0%, #f8d7d7 100%);
             padding: 20px;
             position: relative;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 20% 20%, rgba(255, 200, 200, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 200, 200, 0.4) 0%, transparent 50%);
+                radial-gradient(circle at 20% 20%, rgba(255, 180, 180, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 180, 180, 0.5) 0%, transparent 50%);
         }
 
         /* Snowfall Animation */
@@ -34,10 +34,13 @@
         .snowflake {
             position: fixed;
             top: -10px;
-            color: white;
-            font-size: 1em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            filter: drop-shadow(0 0 2px rgba(255,255,255,0.8));
+            color: #fff;
+            text-shadow: 
+                0 0 5px rgba(255,255,255,0.8),
+                0 0 10px rgba(255,255,255,0.8),
+                0 0 15px rgba(255,255,255,0.8);
+            filter: drop-shadow(0 0 3px rgba(255,255,255,0.9));
+            opacity: 0.9;
             animation-name: snowfall;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
@@ -106,7 +109,6 @@
             border: 1px solid rgba(210,180,140,0.2);
             pointer-events: none;
         }
-
 /* Enhanced Letter Styling */
 .date-card, .welcome-content {
             padding: 40px;
@@ -255,6 +257,7 @@
         }
 
         .date-envelope {
+            background: #fdf5e6;
             border-radius: 15px;
             padding: 30px;
             cursor: pointer;
@@ -442,24 +445,100 @@
             <div id="dates-grid" class="dates-grid"></div>
         </div>
     </div>
-
     <script>
-        // Date ideas object (your existing date content)
-        const dateIdeas = {
-            // ... your existing date content ...
-        };
+        // Create and initialize snowflakes
+        function createSnowflakes() {
+            const snowfall = document.getElementById('snowfall');
+            const numberOfSnowflakes = 75; // Increased number of snowflakes
+            const snowflakes = ['❅', '❆', '❄'];
 
-        // Initialize variables
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3; // Increased base opacity
+                snowflake.style.fontSize = `${Math.random() * 20 + 10}px`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                snowflake.style.animationDelay = `${Math.random() * 2}s`;
+
+                snowfall.appendChild(snowflake);
+            }
+        }
+
+        // Initialize snowfall and regenerate periodically
+        createSnowflakes();
+        setInterval(() => {
+            const snowfall = document.getElementById('snowfall');
+            snowfall.innerHTML = '';
+            createSnowflakes();
+        }, 10000);
+
+        // Date content
+        const dateIdeas = {
+            chill: [
+                {
+                    title: "Cozy Movie Marathon",
+                    description: "My dear love,\n\nLet's create our own cinema paradise at home! We'll build a blanket fort, prepare our favorite snacks, and line up a series of movies we've been wanting to watch together. I'll make sure to have hot chocolate ready, and we can order your favorite takeout. Just us, comfort, and endless entertainment.\n\nWith love and excitement for our cozy night,\n[Your name]"
+                },
+                {
+                    title: "Home Spa Day",
+                    description: "Dearest,\n\nToday we're transforming our home into a luxury spa! I've planned a day of relaxation with face masks, massage oils, and calming music. We'll take turns giving each other massages, enjoy some infused water, and completely unwind together. No phones, no distractions - just pure relaxation.\n\nCan't wait to pamper you,\n[Your name]"
+                },
+                {
+                    title: "Cooking Class at Home",
+                    description: "My love,\n\nGet ready for a culinary adventure right in our kitchen! I've picked out a recipe we've never tried before, bought all the ingredients, and even got us matching aprons. Whether it's a success or a delicious disaster, I know we'll have fun creating something together.\n\nLooking forward to cooking up memories,\n[Your name]"
+                },
+                {
+                    title: "Indoor Picnic & Games",
+                    description: "Darling,\n\nTonight we're having an indoor picnic! I've prepared a spread of your favorite finger foods and set up board games for us to play. We'll lay out blankets, light some candles, and enjoy good food, games, and each other's company without having to worry about the weather.\n\nReady for some fun and games,\n[Your name]"
+                }
+            ],
+            adventure: [
+                {
+                    title: "Local Food Tour",
+                    description: "My adventurous love,\n\nI've mapped out a delicious journey through our city! We'll visit 4-5 different local spots, trying signature dishes at each place. From hidden gems to popular favorites, we'll explore our city's flavors together. I've already researched all the spots and planned the perfect route.\n\nReady to taste the adventure,\n[Your name]"
+                },
+                {
+                    title: "Sunset Kayaking",
+                    description: "Dearest,\n\nLet's paddle into the sunset together! I've arranged for us to go kayaking during the golden hour. We'll glide across the water, watch the sky change colors, and maybe even spot some wildlife. Don't worry - I've taken care of all the equipment rentals.\n\nExcited to share this beautiful experience,\n[Your name]"
+                },
+                {
+                    title: "Paint & Sip Class",
+                    description: "My creative companion,\n\nTonight we're getting artistic! I've booked us spots at a local paint and sip class where we'll create our own masterpieces while enjoying some wine. No artistic experience needed - just bring your sense of adventure and humor. We'll have two unique paintings to remember this night by.\n\nReady to create with you,\n[Your name]"
+                },
+                {
+                    title: "Mystery Dinner",
+                    description: "My curious love,\n\nGet ready for an evening of intrigue! I've booked us tickets to a mystery dinner theater where we'll enjoy a delicious meal while solving a crime. We'll meet interesting characters, collect clues, and work together to crack the case. Dress up is encouraged!\n\nCan't wait to solve this mystery with you,\n[Your name]"
+                }
+            ],
+            'more-adventure': [
+                {
+                    title: "Hot Air Balloon Ride",
+                    description: "My adventurous spirit,\n\nWe're taking our love to new heights - literally! I've arranged an early morning hot air balloon ride for us. We'll float above the city as the sun rises, sip champagne in the clouds, and see the world from a whole new perspective together.\n\nLooking forward to soaring with you,\n[Your name]"
+                },
+                {
+                    title: "Rock Climbing",
+                    description: "My brave companion,\n\nToday we're challenging ourselves with an indoor rock climbing adventure! I've booked us a beginner's lesson where we'll learn the basics of climbing together. We'll encourage each other, push our limits, and celebrate our achievements. Trust me - it'll be an unforgettable experience!\n\nReady to reach new heights with you,\n[Your name]"
+                },
+                {
+                    title: "Dance Class",
+                    description: "My dancing partner,\n\nSurprise! We're going to learn to dance together! I've signed us up for a private dance lesson where we'll learn some basic steps and perhaps even a full routine. Whether we're naturals or have two left feet, it'll be a fun way to get closer and maybe discover a new hobby.\n\nCan't wait to sweep you off your feet,\n[Your name]"
+                },
+                {
+                    title: "Surprise Road Trip",
+                    description: "My adventure buddy,\n\nPack a bag - we're going on a surprise road trip! I've planned out a full day of exploration to a destination within a few hours' drive. We'll discover new places, try local foods, and create memories along the way. The destination is a surprise, but I promise it'll be worth the journey!\n\nExcited to hit the road with you,\n[Your name]"
+                }
+            ]
+        };
         let currentCategory = null;
         const openedEnvelopes = JSON.parse(localStorage.getItem('openedEnvelopes') || '{}');
 
-        // Toggle welcome message
         function toggleWelcome() {
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = welcomeMessage.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Show category content
         function showCategory(category) {
             currentCategory = category;
             document.getElementById('categories-view').style.display = 'none';
@@ -475,14 +554,12 @@
             renderDates();
         }
 
-        // Return to categories
         function showCategories() {
             document.getElementById('categories-view').style.display = 'block';
             document.getElementById('dates-view').style.display = 'none';
             currentCategory = null;
         }
 
-        // Open an envelope
         function openEnvelope(index) {
             const key = `${currentCategory}-${index}`;
             openedEnvelopes[key] = true;
@@ -490,12 +567,10 @@
             renderDates();
         }
 
-        // Check if envelope is opened
         function isEnvelopeOpened(index) {
             return openedEnvelopes[`${currentCategory}-${index}`] || false;
         }
 
-        // Reset all envelopes
         function resetEnvelopes() {
             if (confirm('Are you sure you want to reset all opened envelopes in this category?')) {
                 Object.keys(openedEnvelopes).forEach(key => {
@@ -508,7 +583,6 @@
             }
         }
 
-        // Render dates for current category
         function renderDates() {
             const datesGrid = document.getElementById('dates-grid');
             datesGrid.innerHTML = '';
@@ -542,36 +616,6 @@
                 }
             });
         }
-
-        // Create snowflakes
-        function createSnowflakes() {
-            const snowfall = document.getElementById('snowfall');
-            const numberOfSnowflakes = 50;
-            const snowflakes = ['❅', '❆', '❄'];
-
-            for (let i = 0; i < numberOfSnowflakes; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.opacity = Math.random();
-                snowflake.style.fontSize = `${Math.random() * 20 + 10}px`;
-                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                snowflake.style.animationDelay = `${Math.random() * 2}s`;
-
-                snowfall.appendChild(snowflake);
-            }
-        }
-
-        // Initialize snowfall
-        createSnowflakes();
-
-        // Regenerate snowflakes periodically
-        setInterval(() => {
-            const snowfall = document.getElementById('snowfall');
-            snowfall.innerHTML = '';
-            createSnowflakes();
-        }, 10000);
     </script>
 </body>
 </html>
