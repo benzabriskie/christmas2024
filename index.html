@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>12 Dates of Christmas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Base Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(to bottom, #ffecec, #e8f5e8);
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffebeb 100%);
             padding: 20px;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255, 200, 200, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 200, 200, 0.4) 0%, transparent 50%);
         }
 
         .container {
@@ -19,196 +24,342 @@
         }
 
         h1 {
+            font-family: 'Great Vibes', cursive;
             text-align: center;
             color: #d32f2f;
-            font-size: 2.5em;
-            margin-bottom: 30px;
+            font-size: 4.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
+        /* Category Grid */
         .categories {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .welcome-container {
+            grid-column: 1 / -1;
+            text-align: center;
             margin-bottom: 40px;
         }
 
+        /* Buttons and Cards */
         .category-btn {
-            padding: 20px;
             background: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
         }
 
         .category-btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        .welcome-btn {
-            grid-column: 1 / -1;
-            background: #f8d7da;
-        }
-
-        .envelopes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .envelope {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .envelope:hover {
-            transform: scale(1.05);
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #d32f2f, #ff6b6b);
         }
 
         .envelope-icon {
-            width: 80px;
-            height: 64px;
-            background: #d32f2f;
-            margin: 0 auto 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
         }
 
-        .opened-dates {
-            margin-top: 40px;
+        .category-btn h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 15px 0;
+        }
+
+        .category-btn p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.95);
+            z-index: 1000;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .welcome-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            border: 2px solid #d32f2f;
+        }
+
+        .welcome-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
+            background: #d32f2f;
+            border-radius: 10px;
+        }
+
+        .welcome-content h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3em;
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-content p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #d32f2f;
+            padding: 10px;
+            line-height: 1;
+        }
+
+        /* Date Categories View */
+        .dates-view {
+            display: none;
+            padding: 20px;
+        }
+
+        .dates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .date-envelope {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .date-envelope:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .date-card {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            white-space: pre-line;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .date-card h3 {
+            font-family: 'Playfair Display', serif;
             color: #d32f2f;
-            margin-top: 0;
+            font-size: 1.8em;
+            margin-bottom: 20px;
         }
 
-        .welcome-message {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .date-card p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2c3e50;
             white-space: pre-line;
-            display: none;
         }
 
         .navigation {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 30px;
         }
 
-        .back-btn {
+        .back-btn, .reset-btn {
+            font-family: 'Poppins', sans-serif;
             background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            padding: 10px;
-        }
-
-        .back-btn:hover {
-            color: #333;
-        }
-
-        .reset-btn {
-            background: none;
-            border: none;
+            border: 2px solid #d32f2f;
+            border-radius: 25px;
+            padding: 10px 20px;
             color: #d32f2f;
             cursor: pointer;
-            padding: 10px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
         }
 
-        .reset-btn:hover {
-            color: #b71c1c;
+        .back-btn:hover, .reset-btn:hover {
+            background: #d32f2f;
+            color: white;
         }
 
-        .show {
-            display: block !important;
+        /* SVG Styles */
+        .envelope-svg {
+            width: 100%;
+            height: 100%;
         }
 
-        .hidden {
-            display: none !important;
+        .bow {
+            fill: #d32f2f;
+        }
+
+        .envelope-body {
+            fill: #ff4444;
+        }
+
+        .envelope-flap {
+            fill: #cc0000;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            color: #d32f2f;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 3em;
+            }
+
+            .welcome-content {
+                padding: 20px;
+                margin: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>12 Dates of Christmas</h1>
-
+        
         <div id="categories-view">
             <div class="categories">
-                <!-- Welcome Message Button -->
-                <button class="category-btn welcome-btn" onclick="toggleWelcome()">
-                    <div class="envelope-icon">📝</div>
-                    <h2>Read Me First</h2>
-                    <p>Click to read your special message</p>
-                </button>
-
-                <!-- Welcome Message Content -->
-                <div id="welcome-message" class="welcome-message">
-                    <h2>My Dearest Love,</h2>
-                    <p>Welcome to your special "12 Dates of Christmas" gift! I've planned twelve unique dates for us, each one carefully chosen to create wonderful memories together.
-
-Here's how it works:
-1. Below you'll find three categories of dates
-2. Each category has four special date envelopes waiting to be opened
-3. Choose any envelope you'd like, and we'll go on that date together
-4. The website will remember which dates we've opened
-
-These dates are my promise to you - a promise of quality time, adventures, laughter, and love.
-
-With all my love,
-[Your name]</p>
+                <div class="welcome-container">
+                    <button class="category-btn" onclick="toggleWelcome()">
+                        <div class="envelope-icon">
+                            <svg class="envelope-svg" viewBox="0 0 100 100">
+                                <path class="envelope-body" d="M10,30 L90,30 L90,90 L10,90 Z"/>
+                                <path class="envelope-flap" d="M10,30 L50,60 L90,30 L50,10 Z"/>
+                                <path class="bow" d="M45,25 Q50,20 55,25 Q50,30 45,25 Z"/>
+                                <circle class="bow" cx="50" cy="25" r="3"/>
+                            </svg>
+                        </div>
+                        <h2>Read Me First</h2>
+                        <p>Click to read your special message</p>
+                    </button>
                 </div>
 
-                <!-- Category Buttons -->
                 <button class="category-btn" onclick="showCategory('chill')">
-                    <div class="envelope-icon">🏠</div>
+                    <div class="envelope-icon">
+                        <svg class="envelope-svg" viewBox="0 0 100 100">
+                            <path class="envelope-body" d="M10,30 L90,30 L90,90 L10,90 Z"/>
+                            <path class="envelope-flap" d="M10,30 L50,60 L90,30 L50,10 Z"/>
+                            <path class="bow" d="M40,25 Q50,15 60,25 Q50,35 40,25 Z"/>
+                            <circle class="bow" cx="50" cy="25" r="4"/>
+                        </svg>
+                    </div>
                     <h2>At-Home/Chill</h2>
+                    <p>Cozy moments together</p>
                 </button>
-                
+
                 <button class="category-btn" onclick="showCategory('adventure')">
-                    <div class="envelope-icon">🧭</div>
+                    <div class="envelope-icon">
+                        <svg class="envelope-svg" viewBox="0 0 100 100">
+                            <path class="envelope-body" d="M10,30 L90,30 L90,90 L10,90 Z"/>
+                            <path class="envelope-flap" d="M10,30 L50,60 L90,30 L50,10 Z"/>
+                            <path class="bow" d="M35,25 Q50,10 65,25 Q50,40 35,25 Z"/>
+                            <circle class="bow" cx="50" cy="25" r="4"/>
+                        </svg>
+                    </div>
                     <h2>A Little Adventurous</h2>
+                    <p>Exciting experiences await</p>
                 </button>
-                
+
                 <button class="category-btn" onclick="showCategory('more-adventure')">
-                    <div class="envelope-icon">🏔️</div>
+                    <div class="envelope-icon">
+                        <svg class="envelope-svg" viewBox="0 0 100 100">
+                            <path class="envelope-body" d="M10,30 L90,30 L90,90 L10,90 Z"/>
+                            <path class="envelope-flap" d="M10,30 L50,60 L90,30 L50,10 Z"/>
+                            <path class="bow" d="M30,25 Q50,5 70,25 Q50,45 30,25 Z"/>
+                            <circle class="bow" cx="50" cy="25" r="4"/>
+                        </svg>
+                    </div>
                     <h2>More Adventurous</h2>
+                    <p>Thrilling adventures together</p>
                 </button>
             </div>
         </div>
 
-        <!-- Category Views -->
-        <div id="category-content" class="hidden">
-            <div class="navigation">
-                <button class="back-btn" onclick="showCategories()">← Back to categories</button>
-                <button class="reset-btn" onclick="resetEnvelopes()">Reset All Envelopes</button>
+        <div id="welcome-message" class="welcome-message">
+            <div class="welcome-content">
+                <button class="close-btn" onclick="toggleWelcome()">×</button>
+                <h2>My Dearest Love</h2>
+                <p>Welcome to your special "12 Dates of Christmas" gift! I've planned twelve unique dates for us, each one carefully chosen to create wonderful memories together.</p>
+                <p>Here's how it works:
+                   <br>1. Below you'll find three categories of dates
+                   <br>2. Each category has four special date envelopes waiting to be opened
+                   <br>3. Choose any envelope you'd like, and we'll go on that date together
+                   <br>4. The website will remember which dates we've opened</p>
+                <p>These dates are my promise to you - a promise of quality time, adventures, laughter, and love.</p>
+                <p>With all my love,<br>[Your name]</p>
             </div>
+        </div>
 
-            <div id="envelopes-container" class="envelopes"></div>
-            <div id="opened-container" class="opened-dates"></div>
+        <div id="dates-view" class="dates-view">
+            <div class="navigation">
+                <button class="back-btn" onclick="showCategories()">← Back to Categories</button>
+                <button class="reset-btn" onclick="resetEnvelopes()">Reset Category</button>
+            </div>
+            <h2 id="category-title" class="section-title"></h2>
+            <div id="dates-grid" class="dates-grid"></div>
         </div>
     </div>
 
@@ -233,38 +384,77 @@ With all my love,
                 }
             ],
             adventure: [
-                // ... [same date ideas as before]
+                {
+                    title: "Local Food Tour",
+                    description: "My adventurous love,\n\nI've mapped out a delicious journey through our city! We'll visit 4-5 different local spots, trying signature dishes at each place. From hidden gems to popular favorites, we'll explore our city's flavors together. I've already researched all the spots and planned the perfect route.\n\nReady to taste the adventure,\n[Your name]"
+                },
+                {
+                    title: "Sunset Kayaking",
+                    description: "Dearest,\n\nLet's paddle into the sunset together! I've arranged for us to go kayaking during the golden hour. We'll glide across the water, watch the sky change colors, and maybe even spot some wildlife. Don't worry - I've taken care of all the equipment rentals.\n\nExcited to share this beautiful experience,\n[Your name]"
+                },
+                {
+                    title: "Paint & Sip Class",
+                    description: "My creative companion,\n\nTonight we're getting artistic! I've booked us spots at a local paint and sip class where we'll create our own masterpieces while enjoying some wine. No artistic experience needed - just bring your sense of adventure and humor. We'll have two unique paintings to remember this night by.\n\nReady to create with you,\n[Your name]"
+                },
+                {
+                    title: "Mystery Dinner",
+                    description: "My curious love,\n\nGet ready for an evening of intrigue! I've booked us tickets to a mystery dinner theater where we'll enjoy a delicious meal while solving a crime. We'll meet interesting characters, collect clues, and work together to crack the case. Dress up is encouraged!\n\nCan't wait to solve this mystery with you,\n[Your name]"
+                }
             ],
             'more-adventure': [
-                // ... [same date ideas as before]
+                {
+                    title: "Hot Air Balloon Ride",
+                    description: "My adventurous spirit,\n\nWe're taking our love to new heights - literally! I've arranged an early morning hot air balloon ride for us. We'll float above the city as the sun rises, sip champagne in the clouds, and see the world from a whole new perspective together.\n\nLooking forward to soaring with you,\n[Your name]"
+                },
+                {
+                    title: "Rock Climbing",
+                    description: "My brave companion,\n\nToday we're challenging ourselves with an indoor rock climbing adventure! I've booked us a beginner's lesson where we'll learn the basics of climbing together. We'll encourage each other, push our limits, and celebrate our achievements. Trust me - it'll be an unforgettable experience!\n\nReady to reach new heights with you,\n[Your name]"
+                },
+                {
+                    title: "Dance Class",
+                    description: "My dancing partner,\n\nSurprise! We're going to learn to dance together! I've signed us up for a private dance lesson where we'll learn some basic steps and perhaps even a full routine. Whether we're naturals or have two left feet, it'll be a fun way to get closer and maybe discover a new hobby.\n\nCan't wait to sweep you off your feet,\n[Your name]"
+                },
+                {
+                    title: "Surprise Road Trip",
+                    description: "My adventure buddy,\n\nPack a bag - we're going on a surprise road trip! I've planned out a full day of exploration to a destination within a few hours' drive. We'll discover new places, try local foods, and create memories along the way. The destination is a surprise, but I promise it'll be worth the journey!\n\nExcited to hit the road with you,\n[Your name]"
+                }
             ]
         };
-
-        // Initialize storage
-        const openedEnvelopes = JSON.parse(localStorage.getItem('openedEnvelopes') || '{}');
+    
+        // Initialize variables
         let currentCategory = null;
-
+        const openedEnvelopes = JSON.parse(localStorage.getItem('openedEnvelopes') || '{}');
+    
         // Toggle welcome message
         function toggleWelcome() {
             const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.classList.toggle('show');
+            welcomeMessage.style.display = welcomeMessage.style.display === 'block' ? 'none' : 'block';
         }
-
+    
         // Show category content
         function showCategory(category) {
             currentCategory = category;
-            document.getElementById('categories-view').classList.add('hidden');
-            document.getElementById('category-content').classList.remove('hidden');
+            document.getElementById('categories-view').style.display = 'none';
+            document.getElementById('dates-view').style.display = 'block';
+            
+            // Set category title
+            const titles = {
+                'chill': 'At-Home/Chill Dates',
+                'adventure': 'A Little Adventurous Dates',
+                'more-adventure': 'More Adventurous Dates'
+            };
+            document.getElementById('category-title').textContent = titles[category];
+            
             renderDates();
         }
-
+    
         // Return to categories
         function showCategories() {
+            document.getElementById('categories-view').style.display = 'block';
+            document.getElementById('dates-view').style.display = 'none';
             currentCategory = null;
-            document.getElementById('categories-view').classList.remove('hidden');
-            document.getElementById('category-content').classList.add('hidden');
         }
-
+    
         // Open an envelope
         function openEnvelope(index) {
             const key = `${currentCategory}-${index}`;
@@ -272,38 +462,49 @@ With all my love,
             localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
             renderDates();
         }
-
+    
         // Check if envelope is opened
         function isEnvelopeOpened(index) {
             return openedEnvelopes[`${currentCategory}-${index}`] || false;
         }
-
+    
         // Reset all envelopes
         function resetEnvelopes() {
-            if (confirm('Are you sure you want to reset all opened envelopes?')) {
-                localStorage.removeItem('openedEnvelopes');
-                location.reload();
+            if (confirm('Are you sure you want to reset all opened envelopes in this category?')) {
+                // Remove only the envelopes from current category
+                Object.keys(openedEnvelopes).forEach(key => {
+                    if (key.startsWith(currentCategory)) {
+                        delete openedEnvelopes[key];
+                    }
+                });
+                localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
+                renderDates();
             }
         }
-
+    
         // Render dates for current category
         function renderDates() {
-            const unopenedContainer = document.getElementById('envelopes-container');
-            const openedContainer = document.getElementById('opened-container');
-            
-            unopenedContainer.innerHTML = '';
-            openedContainer.innerHTML = '';
-
+            const datesGrid = document.getElementById('dates-grid');
+            datesGrid.innerHTML = '';
+    
             dateIdeas[currentCategory].forEach((date, index) => {
                 if (!isEnvelopeOpened(index)) {
                     const envelope = document.createElement('div');
-                    envelope.className = 'envelope';
+                    envelope.className = 'date-envelope';
                     envelope.innerHTML = `
-                        <div class="envelope-icon">❤️</div>
+                        <div class="envelope-icon">
+                            <svg class="envelope-svg" viewBox="0 0 100 100">
+                                <path class="envelope-body" d="M10,30 L90,30 L90,90 L10,90 Z"/>
+                                <path class="envelope-flap" d="M10,30 L50,60 L90,30 L50,10 Z"/>
+                                <path class="bow" d="M40,25 Q50,15 60,25 Q50,35 40,25 Z"/>
+                                <circle class="bow" cx="50" cy="25" r="4"/>
+                            </svg>
+                        </div>
+                        <h3>Date #${index + 1}</h3>
                         <p>Click to open</p>
                     `;
                     envelope.onclick = () => openEnvelope(index);
-                    unopenedContainer.appendChild(envelope);
+                    datesGrid.appendChild(envelope);
                 } else {
                     const dateCard = document.createElement('div');
                     dateCard.className = 'date-card';
@@ -311,10 +512,11 @@ With all my love,
                         <h3>${date.title}</h3>
                         <p>${date.description}</p>
                     `;
-                    openedContainer.appendChild(dateCard);
+                    datesGrid.appendChild(dateCard);
                 }
             });
         }
     </script>
+
 </body>
 </html>
