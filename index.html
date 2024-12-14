@@ -6,6 +6,50 @@
     <title>12 Dates of Christmas</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+    /* Add this to your CSS */
+.date-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.95);
+    z-index: 1000;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.date-popup-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fdf5e6;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    border: 2px solid #d32f2f;
+}
+
+.date-popup-content::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 20px;
+    background: #d32f2f;
+    border-radius: 10px;
+}
+
+.date-popup h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3em;
+    color: #d32f2f;
+    text-align: center;
+    margin-bottom: 30px;
+}
         /* Base Styles */
         body {
             font-family: 'Poppins', sans-serif;
@@ -560,12 +604,39 @@
             currentCategory = null;
         }
 
-        function openEnvelope(index) {
-            const key = `${currentCategory}-${index}`;
-            openedEnvelopes[key] = true;
-            localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
-            renderDates();
-        }
+        function showDatePopup(date) {
+    const popup = document.createElement('div');
+    popup.className = 'date-popup';
+    popup.innerHTML = `
+        <div class="date-popup-content">
+            <button class="close-btn" onclick="closePopup(this)">×</button>
+            <h2>${date.title}</h2>
+            <p>${date.description}</p>
+        </div>
+    `;
+    document.body.appendChild(popup);
+    setTimeout(() => popup.style.display = 'block', 10);
+}
+
+function closePopup(button) {
+    const popup = button.closest('.date-popup');
+    popup.style.display = 'none';
+    setTimeout(() => popup.remove(), 500);
+}
+
+function openEnvelope(index) {
+    const key = `${currentCategory}-${index}`;
+    const date = dateIdeas[currentCategory][index];
+    
+    if (!openedEnvelopes[key]) {
+        // First time opening this envelope - show popup
+        showDatePopup(date);
+    }
+    
+    openedEnvelopes[key] = true;
+    localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
+    renderDates();
+}
 
         function isEnvelopeOpened(index) {
             return openedEnvelopes[`${currentCategory}-${index}`] || false;
