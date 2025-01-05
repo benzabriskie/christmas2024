@@ -4,410 +4,402 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>12 Dates of Christmas</title>
-    <!-- Update the font link in the head section -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-    /* Add this to your CSS */
-.date-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255,255,255,0.95);
-    z-index: 1000;
-    padding: 40px;
-    overflow-y: auto;
-}
+    .date-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.95);
+        z-index: 1000;
+        padding: 40px;
+        overflow-y: auto;
+    }
 
-.date-popup-content {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fdf5e6;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    position: relative;
-    border: 2px solid #d32f2f;
-}
+    .date-popup-content {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fdf5e6;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        position: relative;
+        border: 2px solid #d32f2f;
+    }
 
-.date-popup-content::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 20px;
-    background: #d32f2f;
-    border-radius: 10px;
-}
+    .date-popup-content::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 20px;
+        background: #d32f2f;
+        border-radius: 10px;
+    }
 
-.date-popup h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3em;
-    color: #d32f2f;
-    text-align: center;
-    margin-bottom: 30px;
-}
-        /* Base Styles */
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            margin: 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ffe1e1 0%, #f8d7d7 100%);
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(255, 180, 180, 0.5) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 180, 180, 0.5) 0%, transparent 50%);
+    .date-popup h2 {
+        font-family: 'Great Vibes', cursive;
+        font-size: 3em;
+        color: #d32f2f;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    body {
+        font-family: 'Cormorant Garamond', serif;
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #ffe1e1 0%, #f8d7d7 100%);
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+        background-image: 
+            radial-gradient(circle at 20% 20%, rgba(255, 180, 180, 0.5) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 180, 180, 0.5) 0%, transparent 50%);
+    }
+
+    .snowfall {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .snowflake {
+        position: fixed;
+        top: -10px;
+        color: #fff;
+        text-shadow: 
+            0 0 5px rgba(255,255,255,0.8),
+            0 0 10px rgba(255,255,255,0.8),
+            0 0 15px rgba(255,255,255,0.8);
+        filter: drop-shadow(0 0 3px rgba(255,255,255,0.9));
+        opacity: 0.9;
+        animation-name: snowfall;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes snowfall {
+        0% {
+            transform: translateY(-10px) rotate(0deg);
         }
-
-        /* Snowfall Animation */
-        .snowfall {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+        100% {
+            transform: translateY(100vh) rotate(360deg);
         }
+    }
 
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            color: #fff;
-            text-shadow: 
-                0 0 5px rgba(255,255,255,0.8),
-                0 0 10px rgba(255,255,255,0.8),
-                0 0 15px rgba(255,255,255,0.8);
-            filter: drop-shadow(0 0 3px rgba(255,255,255,0.9));
-            opacity: 0.9;
-            animation-name: snowfall;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
 
-        @keyframes snowfall {
-            0% {
-                transform: translateY(-10px) rotate(0deg);
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
+    h1 {
+        font-family: 'Great Vibes', cursive;
+        text-align: center;
+        color: #d32f2f;
+        font-size: 4.5em;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
+    .categories {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    .welcome-container {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .category-btn, .date-card, .welcome-content {
+        background: #fdf5e6;
+        background-image: 
+            linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.02) 75%),
+            linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.02) 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        border: 1px solid rgba(0,0,0,0.05);
+        position: relative;
+    }
+
+    .category-btn::after, .date-card::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        border: 1px solid rgba(210,180,140,0.2);
+        pointer-events: none;
+    }
+
+    .date-card, .welcome-content {
+        padding: 40px;
+        box-shadow: 
+            0 2px 4px rgba(0,0,0,0.1),
+            0 0 40px rgba(255,223,186,0.5) inset;
+    }
+
+    .date-card::before, .welcome-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            url("data:image/svg+xml,%3Csvg width='6' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 0h1L0 6V5zm1 5v1H5z' fill='%23f0e6d6' fill-opacity='.7'/%3E%3C/svg%3E");
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .category-btn {
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .category-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .category-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #d32f2f, #ff6b6b);
+    }
+
+    .envelope-icon {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+        position: relative;
+    }
+
+    .category-btn h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8em;
+        color: #2c3e50;
+        margin: 15px 0;
+    }
+
+    .category-btn p {
+        color: #666;
+        font-family: 'Lora', serif;
+        font-size: 1.2em;
+    }
+
+    .welcome-message {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.95);
+        z-index: 1000;
+        padding: 40px;
+        overflow-y: auto;
+    }
+
+    .welcome-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        position: relative;
+        border: 2px solid #d32f2f;
+    }
+
+    .welcome-content::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 20px;
+        background: #d32f2f;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .welcome-content h2 {
+        font-family: 'Great Vibes', cursive;
+        font-size: 3em;
+        color: #d32f2f;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .welcome-content p {
+        font-size: 1.2em;
+        line-height: 1.8;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #d32f2f;
+        padding: 10px;
+        line-height: 1;
+        z-index: 2;
+    }
+
+    .dates-view {
+        display: none;
+        padding: 20px;
+    }
+
+    .dates-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .date-envelope {
+        background: #fdf5e6;
+        border-radius: 15px;
+        padding: 30px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .date-envelope:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .date-card h3 {
+        font-family: 'Playfair Display', serif;
+        color: #d32f2f;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .welcome-content p, .date-card p, .date-popup-content p {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.4em;
+        line-height: 1.6;
+    }
+        
+    .date-card p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: #2c3e50;
+        white-space: pre-line;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .back-btn, .reset-btn {
+        font-family: 'Poppins', sans-serif;
+        background: none;
+        border: 2px solid #d32f2f;
+        border-radius: 25px;
+        padding: 10px 20px;
+        color: #d32f2f;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+    }
+
+    .back-btn:hover, .reset-btn:hover {
+        background: #d32f2f;
+        color: white;
+    }
+
+    .envelope-svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .bow {
+        fill: #d32f2f;
+    }
+
+    .envelope-body {
+        fill: #ff4444;
+    }
+
+    .envelope-flap {
+        fill: #cc0000;
+    }
+
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        color: #d32f2f;
+        font-size: 2.5em;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .envelope-note {
+        font-family: 'Great Vibes', cursive;
+        color: #d32f2f;
+        font-size: 1.3em;
+        margin: 10px 0;
+        font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+        .categories {
+            grid-template-columns: 1fr;
         }
 
         h1 {
-            font-family: 'Great Vibes', cursive;
-            text-align: center;
-            color: #d32f2f;
-            font-size: 4.5em;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* Category Grid */
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 0 20px;
-        }
-
-        .welcome-container {
-            grid-column: 1 / -1;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        /* Enhanced Card Styling */
-        .category-btn, .date-card, .welcome-content {
-            background: #fdf5e6;
-            background-image: 
-                linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.02) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.02) 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            border: 1px solid rgba(0,0,0,0.05);
-            position: relative;
-        }
-
-        .category-btn::after, .date-card::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid rgba(210,180,140,0.2);
-            pointer-events: none;
-        }
-/* Enhanced Letter Styling */
-.date-card, .welcome-content {
-            padding: 40px;
-            box-shadow: 
-                0 2px 4px rgba(0,0,0,0.1),
-                0 0 40px rgba(255,223,186,0.5) inset;
-        }
-
-        .date-card::before, .welcome-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg width='6' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 0h1L0 6V5zm1 5v1H5z' fill='%23f0e6d6' fill-opacity='.7'/%3E%3C/svg%3E");
-            pointer-events: none;
-            opacity: 0.5;
-        }
-
-        /* Button and Interaction Styles */
-        .category-btn {
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .category-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .category-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #d32f2f, #ff6b6b);
-        }
-
-        .envelope-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            position: relative;
-        }
-
-        .category-btn h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8em;
-            color: #2c3e50;
-            margin: 15px 0;
-        }
-
-        .category-btn p {
-            color: #666;
-            font-family: 'Lora', serif;
-    font-size: 1.2em;
-            font-size: 1.1em;
-        }
-
-        /* Welcome Message Styling */
-        .welcome-message {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255,255,255,0.95);
-            z-index: 1000;
-            padding: 40px;
-            overflow-y: auto;
+            font-size: 3em;
         }
 
         .welcome-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
-            border: 2px solid #d32f2f;
-        }
-
-        .welcome-content::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 20px;
-            background: #d32f2f;
-            border-radius: 10px;
-            z-index: 1;
-        }
-
-        .welcome-content h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3em;
-            color: #d32f2f;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .welcome-content p {
-            font-size: 1.2em;
-            line-height: 1.8;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #d32f2f;
-            padding: 10px;
-            line-height: 1;
-            z-index: 2;
-        }
-
-        /* Date Categories View */
-        .dates-view {
-            display: none;
             padding: 20px;
+            margin: 20px;
         }
-
-        .dates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .date-envelope {
-            background: #fdf5e6;
-            border-radius: 15px;
-            padding: 30px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .date-envelope:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .date-card {
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-
-        .date-card h3 {
-            font-family: 'Playfair Display', serif;
-            color: #d32f2f;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-
-        .welcome-content p, .date-card p, .date-popup-content p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4em;
-    line-height: 1.6;
-        }
-        
-        .date-card p {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #2c3e50;
-            white-space: pre-line;
-        }
-
-        /* Navigation */
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .back-btn, .reset-btn {
-            font-family: 'Poppins', sans-serif;
-            background: none;
-            border: 2px solid #d32f2f;
-            border-radius: 25px;
-            padding: 10px 20px;
-            color: #d32f2f;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover, .reset-btn:hover {
-            background: #d32f2f;
-            color: white;
-        }
-
-        /* SVG Styles */
-        .envelope-svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .bow {
-            fill: #d32f2f;
-        }
-
-        .envelope-body {
-            fill: #ff4444;
-        }
-
-        .envelope-flap {
-            fill: #cc0000;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            color: #d32f2f;
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .categories {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 3em;
-            }
-
-            .welcome-content {
-                padding: 20px;
-                margin: 20px;
-            }
-        }
+    }
     </style>
 </head>
 <body>
@@ -487,8 +479,7 @@
                     You can open them all now, or have them be a surprise as we go along. 
                     Up to you! Some of them do require some planning in advance and your input, but we'll discuss those! And of course, we can repeat the ones we like over and over again!</p>
                 <p>I was originally going to hand write these and put them in envelopes, but was worried they weren't going to look very good. 
-                    I don't think my graphic design is on-par with yours, but I'm hoping you like it!
-                </p>
+                    I don't think my graphic design is on-par with yours, but I'm hoping you like it!</p>
                 <p>I love you so much Ansley and am so incredibly excited for life with you!</p>
                 <p>All my love,<br>Ben</p>
             </div>
@@ -503,27 +494,28 @@
             <div id="dates-grid" class="dates-grid"></div>
         </div>
     </div>
+
     <script>
         // Create and initialize snowflakes
         function createSnowflakes() {
             const snowfall = document.getElementById('snowfall');
-            const numberOfSnowflakes = 85; // Increased number of snowflakes
+            const numberOfSnowflakes = 85;
             const snowflakes = ['❅', '❆', '❄'];
-
+    
             for (let i = 0; i < numberOfSnowflakes; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
                 snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
                 snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.opacity = Math.random() * 0.7 + 0.3; // Increased base opacity
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
                 snowflake.style.fontSize = `${Math.random() * 20 + 10}px`;
                 snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
                 snowflake.style.animationDelay = `${Math.random() * 2}s`;
-
+    
                 snowfall.appendChild(snowflake);
             }
         }
-
+    
         // Initialize snowfall and regenerate periodically
         createSnowflakes();
         setInterval(() => {
@@ -531,72 +523,85 @@
             snowfall.innerHTML = '';
             createSnowflakes();
         }, 10000);
-
-        // Date content
+    
+        // Date content with notes
         const dateIdeas = {
             chill: [
                 {
                     title: "Scrapbooking + Adventure Planning",
-                    description: "You beat me to getting the instant camera film developed, but we can being to document our adventures for us and hopefully our future kids! I'll leave the creative vision to you, but am happy to tag along to the craft store and pay! We can also being to plan our next adventure that we can add to the scrapbook!"
+                    description: "You beat me to getting the instant camera film developed, but we can being to document our adventures for us and hopefully our future kids! I'll leave the creative vision to you, but am happy to tag along to the craft store and pay! We can also being to plan our next adventure that we can add to the scrapbook!",
+                    note: "Creative time together! 🎨"
                 },
                 {
                     title: "Home Spa Night",
-                    description: "Let me deal with dinner, and then we can have a relaxing night doing facials, taking a bubble bath, lotioning, painting nails, etc. And of course you'll get a message from me."
+                    description: "Let me deal with dinner, and then we can have a relaxing night doing facials, taking a bubble bath, lotioning, painting nails, etc. And of course you'll get a message from me.",
+                    note: "Relaxation awaits... 🧖‍♀️"
                 },
                 {
                     title: "Antico's + Movie II",
-                    description: "To recreate one of my favoite early dates (although they're basically all my favorite cause I got to fall in love with you), we can pick up pizza from Antico's (I'll try not to embarrass you with my terrible pronunication), try another wine recommendation from the frat dude and watch Big Fat Greek Wedding 2 (and 3???)"
+                    description: "To recreate one of my favoite early dates (although they're basically all my favorite cause I got to fall in love with you), we can pick up pizza from Antico's (I'll try not to embarrass you with my terrible pronunication), try another wine recommendation from the frat dude and watch Big Fat Greek Wedding 2 (and 3???)",
+                    note: "Movie night with our favorite pizza! 🍕🎬"
                 },
                 {
                     title: "Indoor Picnic & Games",
-                    description: "Darling,\n\nTonight we're having an indoor picnic! I've prepared a spread of your favorite finger foods and set up board games for us to play. We'll lay out blankets, light some candles, and enjoy good food, games, and each other's company without having to worry about the weather.\n\nReady for some fun and games,\n[Your name]"
+                    description: "We'll set up a cozy indoor picnic with all your favorite snacks and play board games together. No weather worries, just us enjoying each other's company!",
+                    note: "Cozy indoor fun! 🧺♟️"
                 }
             ],
             adventure: [
                 {
                     title: "Eddie's Attic and Bar Exploration",
-                    description: "We'll get tickets to see a show at Eddie's Attic and go bar hopping after, starting with Brick Store!"
+                    description: "We'll get tickets to see a show at Eddie's Attic and go bar hopping after, starting with Brick Store!",
+                    note: "Music & drinks night! 🎵🍻"
                 },
                 {
                     title: "Piedmont Picnic",
-                    description: "I'll buy us picnic supplies and we can chill on a cozy spot in Piedmont Park - reading, people watching and being best friends!!"
+                    description: "I'll buy us picnic supplies and we can chill on a cozy spot in Piedmont Park - reading, people watching and being best friends!!",
+                    note: "Park day together! 🌳📚"
                 },
                 {
                     title: "Ice Skating",
-                    description: "We'll go ice skating at either Atlantic Station or Park Tavern. You'll learn an embarassing fact about me: despite being from the Frozen Tundra, I can't really ice skate and you'll get to watch me fall a bunch!"
+                    description: "We'll go ice skating at either Atlantic Station or Park Tavern. You'll learn an embarassing fact about me: despite being from the Frozen Tundra, I can't really ice skate and you'll get to watch me fall a bunch!",
+                    note: "Winter fun ahead! ⛸️❄️"
                 },
                 {
                     title: "Trivia Redemption",
-                    description: "While obviously an incredibly successful time overall, the trivia performance on our second date left a little to be desired. We'll return to the Lost Druid and try to not get last place. But if we do, who cares, cause we love each other and are the real winners!!!"
+                    description: "While obviously an incredibly successful time overall, the trivia performance on our second date left a little to be desired. We'll return to the Lost Druid and try to not get last place. But if we do, who cares, cause we love each other and are the real winners!!!",
+                    note: "Trivia night take two! 🤓🍺"
                 }
             ],
             'more-adventure': [
                 {
                     title: "Blood Mountain Redemption",
-                    description: "Now that I've gotten my head out of my butt (a little bit at least), we can return to Blood Mountain. I'll carry the summit beer and owe you lots of summit cuddles to keep you warm!"
+                    description: "Now that I've gotten my head out of my butt (a little bit at least), we can return to Blood Mountain. I'll carry the summit beer and owe you lots of summit cuddles to keep you warm!",
+                    note: "Mountain adventure! 🏔️🍺"
                 },
                 {
                     title: "Dance Lessons",
-                    description: "Hot Jam Atlanta has a series of beginner dance lessons, I thought we could pick one and try it. And it's in a neighborhood we don't get to so we can get dinner nearby and explore the area!"
+                    description: "Hot Jam Atlanta has a series of beginner dance lessons, I thought we could pick one and try it. And it's in a neighborhood we don't get to so we can get dinner nearby and explore the area!",
+                    note: "Let's dance together! 💃🕺"
                 },
                 {
                     title: "Fox Theatre Show",
-                    description: "We can't spend so much time right next to the Fox and never see a show! Let me know what show you want to see and we'll get dinner before somewhere nearby (maybe the Spanish place again?) and go to the show. I was thinking Mamma Mia?"
+                    description: "We can't spend so much time right next to the Fox and never see a show! Let me know what show you want to see and we'll get dinner before somewhere nearby (maybe the Spanish place again?) and go to the show. I was thinking Mamma Mia?",
+                    note: "Dinner and a show! 🎭🍷"
                 },
                 {
                     title: "Hot Yoga Class",
-                    description: "In case you didn't fully appreciate how much I am capable of sweating, you can see it in hot yoga! We'll get really sweaty together ;) and you'll get to see me be majorly humbled!"
+                    description: "In case you didn't fully appreciate how much I am capable of sweating, you can see it in hot yoga! We'll get really sweaty together ;) and you'll get to see me be majorly humbled!",
+                    note: "Hot yoga adventure! 🧘‍♀️💦"
                 }
             ]
         };
+    
         let currentCategory = null;
         const openedEnvelopes = JSON.parse(localStorage.getItem('openedEnvelopes') || '{}');
-
+    
         function toggleWelcome() {
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = welcomeMessage.style.display === 'block' ? 'none' : 'block';
         }
-
+    
         function showCategory(category) {
             currentCategory = category;
             document.getElementById('categories-view').style.display = 'none';
@@ -611,7 +616,7 @@
             
             renderDates();
         }
-
+    
         function showCategories() {
             document.getElementById('categories-view').style.display = 'block';
             document.getElementById('dates-view').style.display = 'none';
@@ -619,91 +624,92 @@
         }
 
         function showDatePopup(date) {
-    const popup = document.createElement('div');
-    popup.className = 'date-popup';
-    popup.innerHTML = `
-        <div class="date-popup-content">
-            <button class="close-btn" onclick="closePopup(this)">×</button>
-            <h2>${date.title}</h2>
-            <p>${date.description}</p>
-        </div>
-    `;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.style.display = 'block', 10);
-}
-
-function closePopup(button) {
-    const popup = button.closest('.date-popup');
-    popup.style.display = 'none';
-    setTimeout(() => popup.remove(), 500);
-}
-
-function openEnvelope(index) {
-    const key = `${currentCategory}-${index}`;
-    const date = dateIdeas[currentCategory][index];
-    
-    if (!openedEnvelopes[key]) {
-        // First time opening this envelope - show popup
-        showDatePopup(date);
+        const popup = document.createElement('div');
+        popup.className = 'date-popup';
+        popup.innerHTML = `
+            <div class="date-popup-content">
+                <button class="close-btn" onclick="closePopup(this)">×</button>
+                <h2>${date.title}</h2>
+                <p>${date.description}</p>
+            </div>
+        `;
+        document.body.appendChild(popup);
+        setTimeout(() => popup.style.display = 'block', 10);
     }
-    
-    openedEnvelopes[key] = true;
-    localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
-    renderDates();
-}
 
-        function isEnvelopeOpened(index) {
-            return openedEnvelopes[`${currentCategory}-${index}`] || false;
+    function closePopup(button) {
+        const popup = button.closest('.date-popup');
+        popup.style.display = 'none';
+        setTimeout(() => popup.remove(), 500);
+    }
+
+    function openEnvelope(index) {
+        const key = `${currentCategory}-${index}`;
+        const date = dateIdeas[currentCategory][index];
+        
+        if (!openedEnvelopes[key]) {
+            // First time opening this envelope - show popup
+            showDatePopup(date);
         }
+        
+        openedEnvelopes[key] = true;
+        localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
+        renderDates();
+    }
 
-        function resetEnvelopes() {
-            if (confirm('Are you sure you want to reset all opened envelopes in this category?')) {
-                Object.keys(openedEnvelopes).forEach(key => {
-                    if (key.startsWith(currentCategory)) {
-                        delete openedEnvelopes[key];
-                    }
-                });
-                localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
-                renderDates();
+    function isEnvelopeOpened(index) {
+        return openedEnvelopes[`${currentCategory}-${index}`] || false;
+    }
+
+    function resetEnvelopes() {
+        if (confirm('Are you sure you want to reset all opened envelopes in this category?')) {
+            Object.keys(openedEnvelopes).forEach(key => {
+                if (key.startsWith(currentCategory)) {
+                    delete openedEnvelopes[key];
+                }
+            });
+            localStorage.setItem('openedEnvelopes', JSON.stringify(openedEnvelopes));
+            renderDates();
+        }
+    }
+
+    function renderDates() {
+        const datesGrid = document.getElementById('dates-grid');
+        datesGrid.innerHTML = '';
+
+        dateIdeas[currentCategory].forEach((date, index) => {
+            if (!isEnvelopeOpened(index)) {
+                // Unopened envelope
+                const envelope = document.createElement('div');
+                envelope.className = 'date-envelope';
+                envelope.innerHTML = `
+                    <div class="envelope-icon">
+                        <svg class="envelope-svg" viewBox="0 0 100 100">
+                            <path class="envelope-body" d="M10,30 L90,30 L90,90 L10,90 Z"/>
+                            <path class="envelope-flap" d="M10,30 L50,60 L90,30 L50,10 Z"/>
+                            <path class="bow" d="M40,25 Q50,15 60,25 Q50,35 40,25 Z"/>
+                            <circle class="bow" cx="50" cy="25" r="4"/>
+                        </svg>
+                    </div>
+                    <h3>Date #${index + 1}</h3>
+                    ${date.note ? `<p class="envelope-note">${date.note}</p>` : ''}
+                    <p>Click to open</p>
+                `;
+                envelope.onclick = () => openEnvelope(index);
+                datesGrid.appendChild(envelope);
+            } else {
+                // Opened date card
+                const dateCard = document.createElement('div');
+                dateCard.className = 'date-card';
+                dateCard.innerHTML = `
+                    <h3>${date.title}</h3>
+                    <p>Click to view details</p>
+                `;
+                dateCard.onclick = () => showDatePopup(date);
+                datesGrid.appendChild(dateCard);
             }
-        }
-
-        function renderDates() {
-    const datesGrid = document.getElementById('dates-grid');
-    datesGrid.innerHTML = '';
-
-    dateIdeas[currentCategory].forEach((date, index) => {
-        if (!isEnvelopeOpened(index)) {
-            // Unopened envelope
-            const envelope = document.createElement('div');
-            envelope.className = 'date-envelope';
-            envelope.innerHTML = `
-                <div class="envelope-icon">
-                    <svg class="envelope-svg" viewBox="0 0 100 100">
-                        <path class="envelope-body" d="M10,30 L90,30 L90,90 L10,90 Z"/>
-                        <path class="envelope-flap" d="M10,30 L50,60 L90,30 L50,10 Z"/>
-                        <path class="bow" d="M40,25 Q50,15 60,25 Q50,35 40,25 Z"/>
-                        <circle class="bow" cx="50" cy="25" r="4"/>
-                    </svg>
-                </div>
-                <h3>Date #${index + 1}</h3>
-                <p>Click to open</p>
-            `;
-            envelope.onclick = () => openEnvelope(index);
-            datesGrid.appendChild(envelope);
-        } else {
-            // Opened date - showing just the title
-            const dateCard = document.createElement('div');
-            dateCard.className = 'date-card';
-            dateCard.innerHTML = `
-                <h3>${date.title}</h3>
-                <p>Click to view details</p>
-            `;
-            dateCard.onclick = () => showDatePopup(date);
-            datesGrid.appendChild(dateCard);
-        }
-    });
-}
-    </script>
+        });
+    }
+</script>
 </body>
 </html>
